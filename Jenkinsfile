@@ -11,7 +11,7 @@ pipeline {
                 sh 'npm install'
             }
         }
-        
+
         stage('Test') { 
             steps {
                 sh './jenkins/scripts/test.sh' 
@@ -26,12 +26,6 @@ pipeline {
             }
         }
 
-        stage('Manual Approval') {
-            steps {
-                input "Lanjutkan ke tahap Deploy?"
-            }
-        }
-
         stage('Post Deploy') {
             steps {
                 echo "Waiting for 1 minute before finishing the pipeline"
@@ -39,5 +33,12 @@ pipeline {
                 echo "Post Deploy steps here"
             }
         }
+
+        stage('Manual Approval') {
+            steps {
+                input "Lanjutkan ke tahap Deploy?"
+            }
+        }
+
     }
 }
