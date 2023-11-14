@@ -26,14 +26,16 @@ pipeline {
             }
         }
 
-          stage('Deploy') {
+        stage('Deploy') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-                
-                sleep(time: 60, unit: 'SECONDS')
+                script {
+                    echo 'Waiting for 1 minute before proceeding...'
+                    sleep time: 60, unit: 'SECONDS'
+        }  
                 sh './jenkins/scripts/kill.sh'
-            }
-        }
+    }
+}
 
     }
 }
