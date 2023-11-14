@@ -11,28 +11,13 @@ pipeline {
                 sh 'npm install'
             }
         }
-
+        
         stage('Test') { 
             steps {
                 sh './jenkins/scripts/test.sh' 
             }
         } 
 
-        stage('Deploy') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-                input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)'
-                sh './jenkins/scripts/kill.sh'
-            }
-        }
-
-        stage('Post Deploy') {
-            steps {
-                echo "Waiting for 1 minute before finishing the pipeline"
-                sleep(time: 60, unit: 'SECONDS')
-                echo "Post Deploy steps here"
-            }
-        }
 
         stage('Manual Approval') {
             steps {
@@ -40,5 +25,12 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+            steps {
+                echo "Waiting for 1 minute before finishing the pipeline"
+                sleep(time: 60, unit: 'SECONDS')
+                echo "Post Deploy steps here"
+            }
+        }
     }
 }
