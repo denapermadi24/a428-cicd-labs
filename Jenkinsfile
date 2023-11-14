@@ -29,10 +29,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-                script {
-                    echo 'Waiting for 1 minute before proceeding...'
-                    sleep time: 60, unit: 'SECONDS'
-        }  
+                sh './jenkins/scripts/sleep.sh'
                 sh './jenkins/scripts/kill.sh'
     }
 }
