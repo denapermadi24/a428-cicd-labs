@@ -29,7 +29,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-                sh './jenkins/scripts/sleep.sh'
+                sh 'sleep 60'
                 sh './jenkins/scripts/kill.sh'
     }
 }
