@@ -18,6 +18,7 @@ pipeline {
             }
         } 
 
+      
 
         stage('Manual Approval') {
             steps {
@@ -25,12 +26,14 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+          stage('Deploy') {
             steps {
-                echo "Waiting for 1 minute before finishing the pipeline"
+                sh './jenkins/scripts/deliver.sh'
+                
                 sleep(time: 60, unit: 'SECONDS')
-                echo "Post Deploy steps here"
+                sh './jenkins/scripts/kill.sh'
             }
         }
+
     }
 }
